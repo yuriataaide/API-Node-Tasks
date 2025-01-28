@@ -48,7 +48,6 @@ export const routes = [
                 description: search,
             } : null)
 
-            console.log(tasks)
             return res.end(JSON.stringify(tasks))
         }
     },
@@ -60,15 +59,18 @@ export const routes = [
             const { title, description } = req.body 
 
             if(!title && !description) {
-                return res.writeHead(404).end(
+                return res.writeHead(400).end(
                     JSON.stringify({message: 'Title or Description are required.'})
                 )
             }
 
             const [task] = database.select('tasks', { id })
 
+            console.log(task)
             if(!task) {
-                return res.writeHead(404).end()
+                return res.writeHead(404).end(
+                    JSON.stringify({message: 'Task not found.'})
+                )
             }
 
             database.update('tasks', id, {
