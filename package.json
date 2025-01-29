@@ -11,6 +11,7 @@
   "author": "AtaideDev",
   "license": "ISC",
   "dependencies": {
-    "csv-parse": "^5.6.0"
+    "csv-parse": "^5.6.0",
+    "node-fetch": "^3.3.2"
   }
 }

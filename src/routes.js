@@ -9,19 +9,8 @@ export const routes = [
         method: 'POST',
         path: buildRoutePath('/tasks'),
         handler: (req, res) => {
-            const { title, description } = req.body
-
-            if(!title) {
-                return res.writeHead(400).end(
-                    JSON.stringify({message: 'Title is required.'})
-                )
-            }
-
-            if(!description) {
-                return res.writeHead(400).end(
-                    JSON.stringify({message: 'Description is required.'})
-                )
-            }
+            console.log('req.body', req.body)
+            const {title, description} = req.body
 
             const task = {
                 id: randomUUID(),

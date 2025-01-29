@@ -5,16 +5,16 @@ const pathCSV = new URL('./tasks.csv', import.meta.url)
 
 const stream = fs.createReadStream(pathCSV)
 
-const parseCSV = parse ({
-    delimiter: ',',
+const parseCSV = parse({
+    delimiter: ';',
     skipEmptyLines: true,
     fromLine: 2
 })
 
-async function onReady() {
-    const lines = stream.pipes(parseCSV)
+async function run() {
+    const linesParse = stream.pipe(parseCSV)
 
-    for await (const line of lines) {
+    for await (const line of linesParse) {
         const [title, description] = line
 
 
@@ -29,10 +29,12 @@ async function onReady() {
                 description
             })
         })
+
+        await wait(1000)
     }
 }
 
-onReady()
+run()
 
 function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms))
