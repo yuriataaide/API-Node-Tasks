@@ -88,12 +88,6 @@ export const routes = [
         handler: (req, res) => {
             const { id } = req.params
 
-            const [task] = database.select('task', { id })
-
-            if(!task) {
-                return res.writeHead(404).end()
-            }
-
             database.delete('tasks', id)
 
             return res.writeHead(204).end()
@@ -105,13 +99,6 @@ export const routes = [
         handler: (req, res) => {
             const { id } = req.params
            
-
-            const [task] = database.select('tasks', { id })
-
-            if(!task) {
-                return res.writeHead(404).end()
-            }
-
             const taskCompleted = !!task.completed_at
             const completed_at = taskCompleted ? null : new Date()
 
